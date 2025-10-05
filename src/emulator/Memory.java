@@ -2,6 +2,13 @@ package src.emulator;
 import src.custom_exceptions.ExceededTotalStorage;
 import src.custom_exceptions.ROMWriteException;
 
+import javax.swing.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+
 public class Memory {
     /*
 
@@ -39,6 +46,27 @@ public class Memory {
 
         memory[address] = data;
     }
+
+    public void load_program(String file_path){
+        //reading data drom a .bin file and loading it into a temp array form whcih we'll load it up in the memory
+        try{
+            Path path = Paths.get(file_path);
+            byte[] program_data = Files.readAllBytes(path);
+            System.out.println("Loaded bytes: " + program_data.length);
+            int length = program_data.length;
+            for (int i = 0; i < length; i++) {
+                memory[i] = program_data[i];
+                System.out.println(memory[i]);
+            }
+
+
+        }
+        catch (IOException e){
+            System.out.println("Error" + e.getMessage());
+        }
+    }
+
+
 
 
 }
