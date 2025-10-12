@@ -22,11 +22,16 @@ public class Memory {
     */
 
     private final byte[] memory =  new byte[65536];
+    private int program_length = 0;
+
+    public int getProgram_length() {
+        return program_length;
+    }
 
     //methods
     public byte read(int address){
         //FETCH BYTE STORED IN THE ADDRESS; RAM AND ROM BOTH
-        byte fetch_memory_location = memory[address];
+        byte fetch_memory_location = this.memory[address];
         return fetch_memory_location;
     }
 
@@ -44,19 +49,19 @@ public class Memory {
             throw new ROMWriteException("Can not write into ROM");
         }
 
-        memory[address] = data;
+        this.memory[address] = data;
     }
 
     public void load_program(String file_path){
-        //reading data drom a .bin file and loading it into a temp array form whcih we'll load it up in the memory
+        //reading data from a .bin file and loading it into a temp array form whcih we'll load it up in the memory
         try{
             Path path = Paths.get(file_path);
             byte[] program_data = Files.readAllBytes(path);
-            System.out.println("Loaded bytes: " + program_data.length);
-            int length = program_data.length;
-            for (int i = 0; i < length; i++) {
-                memory[i] = program_data[i];
-                System.out.println(memory[i]);
+            this.program_length = program_data.length;
+            System.out.println("Loaded bytes: " + this.program_length);
+            for (int i = 0; i < this.program_length; i++) {
+                this.memory[i] = program_data[i];
+                this.memory[i] = program_data[i];
             }
 
 
