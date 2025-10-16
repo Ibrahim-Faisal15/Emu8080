@@ -22,6 +22,11 @@ public class Memory {
     */
 
     private final byte[] memory =  new byte[65536];
+
+    public byte[] getMemory() {
+        return memory;
+    }
+
     private int program_length = 0;
 
     public int getProgram_length() {
@@ -30,9 +35,9 @@ public class Memory {
 
     //methods
     public byte read(int address){
-        //FETCH BYTE STORED IN THE ADDRESS; RAM AND ROM BOTH
-        byte fetch_memory_location = this.memory[address];
-        return fetch_memory_location;
+        //FETCH  (data) STORED IN THE ADDRESS; RAM AND ROM BOTH
+        byte fetch_memory_data = this.memory[address];
+        return fetch_memory_data;
     }
 
     public void write(int address, byte data) throws ROMWriteException, ExceededTotalStorage {
